@@ -1,7 +1,24 @@
-# Awesome Project Build with TypeORM
+<h1 align="center">
+  API de Colaboradores
+</h1>
 
-Steps to run this project:
+## :rocket: Como executar
 
-1. Run `npm i` command
-2. Setup database settings inside `data-source.ts` file
-3. Run `npm start` command
+<ul>
+  <li>Clonar o projeto e no diretório raiz executar o comando <strong>yarn</strong></li>
+  <li>Rodar o projeto com o comando <strong>yarn start</strong></li>
+</ul>
+
+## :speech_balloon: Funcionalidades
+
+<ul>
+  <li>CRUD dos colaboradores do sistema</li>
+</ul>
+
+## ⌨️ Tecnologias
+
+<ul>
+  <li>TypeOrm</li>
+  <li>Node</li>
+  <li>TypeScript</li>
+</ul>
