@@ -71,14 +71,12 @@ class PersonUseCase {
     if (person.rg) {
       personToUpdate.rg = person.rg;
     }
-    console.log("personToUpdate", personToUpdate);
 
     if (Object.keys(personToUpdate).length > 0) {
       const personAlreadyExist = await personsRepository.findByAttributes({
         ...personToUpdate,
       });
 
-      console.log("personAlreadyExist", personAlreadyExist);
       if (
         personAlreadyExist &&
         personAlreadyExist.idPerson !== person.idPerson
