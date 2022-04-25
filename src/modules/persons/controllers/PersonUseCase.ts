@@ -48,7 +48,7 @@ class PersonUseCase {
     const person = await personsRepository.findById(idPerson);
 
     if (!person) {
-      throw new AppError("Pessoa não existe");
+      throw new AppError("Colaborador não existe");
     }
 
     const isDeleted = await personsRepository.delete(idPerson);
@@ -59,20 +59,34 @@ class PersonUseCase {
     const personExist = await personsRepository.findById(person.idPerson);
 
     if (!personExist) {
-      throw new AppError("Pessoa não existe");
+      throw new AppError("Colaborador não existe");
     }
 
-    const personToUpdate = {
-      cpf: person.cpf,
-      rg: person.rg,
-    } as Person;
+    const personToUpdate = {} as Person;
 
-    const personAlreadyExist = await personsRepository.findByAttributes({
-      ...personToUpdate,
-    });
+    if (person.cpf) {
+      personToUpdate.cpf = person.cpf;
+    }
 
-    if (personAlreadyExist && personAlreadyExist.idPerson !== person.idPerson) {
-      throw new AppError("CPF ou RG já está sendo usado por outro usuário");
+    if (person.rg) {
+      personToUpdate.rg = person.rg;
+    }
+    console.log("personToUpdate", personToUpdate);
+
+    if (Object.keys(personToUpdate).length > 0) {
+      const personAlreadyExist = await personsRepository.findByAttributes({
+        ...personToUpdate,
+      });
+
+      console.log("personAlreadyExist", personAlreadyExist);
+      if (
+        personAlreadyExist &&
+        personAlreadyExist.idPerson !== person.idPerson
+      ) {
+        throw new AppError(
+          "CPF ou RG já está sendo usado por outro colaborador"
+        );
+      }
     }
 
     return personsRepository.update(person);
